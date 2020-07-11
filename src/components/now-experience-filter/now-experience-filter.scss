@@ -1,0 +1,72 @@
+@import '@servicenow/sass-kit/host';
+@import '@servicenow/sass-utility/spacing';
+@import '@servicenow/sass-utility/align';
+@import '@servicenow/sass-utility/a11y';
+
+:host {
+  vertical-align: top;
+}
+
+.filter-container {
+  margin-left: 1rem;
+}
+
+.container {
+  margin-top: now-fn-px2rem(4px);
+  margin-bottom: $now-global-space--sm;
+
+  &.-compact {
+    margin-bottom: 0;
+  }
+}
+
+.input-input-container {
+  position: relative;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.input {
+  width: 100%;
+  height: now-fn-px2rem(32px);
+  border: none;
+  border-bottom-width: 1px;
+  border-bottom-style: solid;
+  border-bottom-color: RGB($now-color--neutral-5);
+  @include now-mx-rtl-property(padding-left, $now-global-space--xs);
+  font-size: $now-global-font-size--md;
+  outline: none;
+
+  &.-md {
+    width: now-fn-px2rem(300px);
+  }
+
+  &.-lg {
+    width: now-fn-px2rem(580px);
+  }
+
+  &.-fullwidth {
+    width: 100%;
+  }
+}
+
+.-transparent {
+  .input {
+    background-color: transparent;
+  }
+}
+
+.-show-error {
+  .input {
+    border-color: RGB($now-color--alert-critical-2);
+
+    &:focus {
+      background-color: RGB($now-color--alert-critical-0);
+    }
+  }
+}
+
+now-button {
+  margin-left: .25rem;
+}

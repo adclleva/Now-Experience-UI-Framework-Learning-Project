@@ -7,6 +7,8 @@ import styles from "./styles.scss";
 import { columns } from "./default";
 
 import "../components/now-experience-table";
+import "../components/now-experience-filter";
+
 import { actionHandlers } from "./actionHandlers";
 
 createCustomElement("snc-now-experience-dashboard", {
@@ -20,11 +22,14 @@ createCustomElement("snc-now-experience-dashboard", {
 		console.log("dataRows", dataRows);
 		return (
 			<div className="container">
-				<now-experience-table
-					title={"Task table"}
-					dataColumns={displayColumns}
-					dataRows={dataRows}
-				/>
+				<div className="table-content">
+					<now-experience-filter></now-experience-filter>
+					<now-experience-table
+						title="Task table"
+						dataColumns={displayColumns}
+						dataRows={dataRows}
+					></now-experience-table>
+				</div>
 			</div>
 		);
 	},
