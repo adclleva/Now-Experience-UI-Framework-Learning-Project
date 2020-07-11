@@ -28,3 +28,7 @@ createCustomElement("snc-now-experience-dashboard", {
 	actionHandlers: {},
 	styles,
 });
+
+/**
+ * an action handler is only handle by one component once but can handle multiple components
+ */
