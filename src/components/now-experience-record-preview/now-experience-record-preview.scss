@@ -1,0 +1,42 @@
+.card-container {
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  position: relative;
+  width: 80%;
+  flex: 1 1 auto;
+  margin: 0px;
+  padding: 0px 1rem 1.5rem 1.5rem;
+  height: 50vh;
+  overflow: auto;
+}
+
+.card-container .card {
+  display: block;
+  min-width: 16rem;
+  margin-right: 0.5rem;
+  position: relative;
+  width: 80%;
+  flex: 1 0 16rem;
+}
+
+.card {
+  position: relative;
+  border-radius: 0.125rem;
+  border-width: 1px;
+  border-style: solid;
+  border-image: initial;
+  border-color: #dadada;
+  flex: 0 0 auto;
+  padding: 1rem;
+  margin: 0.25rem;
+  text-decoration: none;
+}
+
+now-heading {
+  margin: 1rem 0;
+}
+
+now-loader {
+  margin-right: 2rem;
+}

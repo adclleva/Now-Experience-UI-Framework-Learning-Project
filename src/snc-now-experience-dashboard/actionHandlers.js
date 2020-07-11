@@ -1,14 +1,11 @@
-import { createHttpEffect } from "@servicenow/ui-effect-http"; // this will provide us an api to fetch data from our instance
+import { createHttpEffect } from "@servicenow/ui-effect-http";
 import { actionTypes } from "@servicenow/ui-core";
-
 /**
  * COMPONENT_BOOTSTRAPPED is dispatched once after an element is initially connected and bootstrapped.
  * Useful for running setup code, such as fetching resources.
  */
 const { COMPONENT_BOOTSTRAPPED } = actionTypes;
-console.log(actionTypes);
 import { columns, taskTables } from "./default";
-
 /**
  * Deep dive: The createHttpEffect method accepts two arguments - the URL and a configuration object. We configuring the method, queryParams, and successActionType parameters:
  * method: GET, because we are returning a list of task records from the server.
@@ -86,6 +83,48 @@ export const actionHandlers = {
 			sysparm_display_value: "all",
 			sysparm_exclude_reference_link: true,
 			sysparm_fields: fields,
+		});
+	},
+	ROW_CLICKED: (coeffects) => {
+		const { dispatch, action, updateState } = coeffects;
+		const { sys_id, sys_class_name } = action.payload;
+
+		dispatch("FETCH_TASK_RECORD", {
+			id: sys_id,
+			table: sys_class_name,
+			sysparm_display_value: "all",
+			sysparm_exclude_reference_link: true,
+		});
+	},
+	FETCH_TASK_RECORD: createHttpEffect("api/now/table/:table/:id", {
+		method: "GET",
+		pathParams: ["table", "id"],
+		queryParams: ["sysparm_display_value", "sysparm_exclude_reference_link"],
+		batch: false,
+		successActionType: "FETCH_TASK_RECORD_SUCCEEDED",
+	}),
+	FETCH_TASK_RECORD_SUCCEEDED: (coeffects) => {
+		const { action, updateState } = coeffects;
+		const { result } = action.payload;
+
+		const items = Object.keys(result)
+			.sort()
+			.reduce((acc, val) => {
+				acc.push({
+					label: val,
+					value: {
+						type: "string",
+						value: result[val].display_value,
+					},
+				});
+
+				return acc;
+			}, []);
+
+		updateState({
+			items,
+			recordTitle: result.number.display_value,
+			recordDetails: result.short_description.display_value,
 		});
 	},
 };

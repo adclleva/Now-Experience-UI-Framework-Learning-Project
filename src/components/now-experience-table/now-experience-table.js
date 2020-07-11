@@ -10,7 +10,6 @@ createCustomElement("now-experience-table", {
 
 		return (
 			<div className="table-container">
-				<h1 style={{ color: "red" }}>{title}</h1>
 				<table>
 					<thead>
 						<tr>

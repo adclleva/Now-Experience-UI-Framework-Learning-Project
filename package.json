@@ -19,6 +19,8 @@
 		"@servicenow/cli-component-archetype": "17.0.3",
 		"@servicenow/library-translate": "orlando",
 		"@servicenow/now-button": "^17.0.1",
+		"@servicenow/now-heading": "^17.0.1",
+		"@servicenow/now-label-value": "^17.0.1",
 		"@servicenow/sass-kit": "orlando",
 		"@servicenow/sass-theme": "orlando",
 		"@servicenow/ui-core": "orlando",
