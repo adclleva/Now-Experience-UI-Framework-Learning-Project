@@ -1,0 +1,36 @@
+@import '@servicenow/sass-kit/host';
+
+:host {
+  font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+  font-size: 0.75rem;
+}
+
+.container {
+  display: flex;
+  width: 100%;
+}
+
+.header {
+  margin: 2rem;
+}
+
+.panel-content {
+  display: flex;
+  flex-direction: column;
+  width: 20%;
+  min-width: 22rem;
+  flex: 1;
+  height: 100vh;
+  overflow: scroll;
+}
+
+
+.table-content {
+  width: 80%;
+  height: 100vh;
+  overflow: scroll;
+}
+
+.preview-heading {
+  margin: 2rem 2rem 0 2rem;
+}
