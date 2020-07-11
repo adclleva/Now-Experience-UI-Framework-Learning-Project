@@ -19,3 +19,6 @@ createCustomElement("x-478534-now-experience-dashboard", {
 	view,
 	styles,
 });
+
+// presentational components are very similar to pure or dumb components in react
+// make sure properties (props) are unique
