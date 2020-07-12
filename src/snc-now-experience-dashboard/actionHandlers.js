@@ -5,7 +5,7 @@ import { actionTypes } from "@servicenow/ui-core";
  * Useful for running setup code, such as fetching resources.
  */
 const { COMPONENT_BOOTSTRAPPED } = actionTypes;
-import { columns, taskTables } from "./default";
+
 /**
  * Deep dive: The createHttpEffect method accepts two arguments - the URL and a configuration object. We configuring the method, queryParams, and successActionType parameters:
  * method: GET, because we are returning a list of task records from the server.
@@ -18,6 +18,7 @@ import { columns, taskTables } from "./default";
  *
  * when the compnent gets rendered on the page, we would want to fetch the data
  */
+import { columns, taskTables, tableLabels } from "./default";
 
 export const actionHandlers = {
 	[COMPONENT_BOOTSTRAPPED]: (coeffects) => {
@@ -51,8 +52,17 @@ export const actionHandlers = {
 	FETCH_TASK_DATA_SUCCEEDED: (coeffects) => {
 		const { action, updateState } = coeffects;
 		const { result } = action.payload;
+		const visualizations = {};
 
 		const dataRows = result.map((row) => {
+			const tableName = row.sys_class_name.value;
+
+			if (visualizations[tableName]) {
+				visualizations[tableName]++;
+			} else {
+				visualizations[tableName] = 1;
+			}
+
 			return Object.keys(row).reduce((acc, val) => {
 				if (val === "sys_class_name") {
 					acc[val] = row[val].value;
@@ -64,7 +74,16 @@ export const actionHandlers = {
 			}, {});
 		});
 
-		updateState({ dataRows });
+		updateState({
+			dataRows,
+			chartData: Object.keys(visualizations).map((table) => {
+				return {
+					value: table,
+					label: tableLabels[table],
+					count: visualizations[table],
+				};
+			}),
+		});
 	},
 	"NOW_EXPERIENCE_FILTER#CHANGED": (coeffects) => {
 		const { action, dispatch } = coeffects;
@@ -128,7 +147,6 @@ export const actionHandlers = {
 		});
 	},
 };
-
 /**
  * an action handler is only handle by one component once but can handle multiple components
  * if the component that it's handling is nested

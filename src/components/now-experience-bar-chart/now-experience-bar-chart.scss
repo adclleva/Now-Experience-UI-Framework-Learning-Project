@@ -1,0 +1,30 @@
+.bar-container {
+  margin: 0 0 0 2rem;
+}
+
+.bar {
+  // fill: #d81c3f;
+}
+
+.bar:hover {
+  fill: darkred;
+}
+
+.bar-chart {
+  margin: 1rem 1rem 1rem 0;
+}
+
+.axis {
+  font: 10px sans-serif;
+
+  path,
+  line {
+    fill: none;
+    stroke: black;
+    shape-rendering: crispEdges;
+  }
+}
+
+.x.axis path {
+  display: none;
+}

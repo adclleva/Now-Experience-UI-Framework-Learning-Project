@@ -8,6 +8,7 @@ import styles from "./styles.scss";
 import "../components/now-experience-table";
 import "../components/now-experience-filter";
 import "../components/now-experience-record-preview";
+import "../components/now-experience-bar-chart";
 
 import { columns } from "./default";
 
@@ -15,15 +16,20 @@ createCustomElement("snc-now-experience-dashboard", {
 	// when this component renders, an action will dispatch
 
 	view: function (state, helpers) {
-		const { dataRows, recordTitle, recordDetails, items } = state;
+		const { dataRows, recordTitle, recordDetails, items, chartData } = state;
 
 		const displayColumns = columns.filter((col) => {
-			return col.field !== "sys_id"; // filter out the sys_id column
+			return col.field !== "sys_id";
 		});
 
 		return (
 			<div className="container">
 				<div className="panel-content">
+					<div className="chart">
+						<now-experience-bar-chart
+							visualizations={chartData}
+						></now-experience-bar-chart>
+					</div>
 					<now-experience-record-preview
 						items={items}
 						recordTitle={recordTitle}
